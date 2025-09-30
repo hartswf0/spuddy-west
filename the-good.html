@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>THE GOOD, THE BAD, AND THE SPUDDY — Cinematic Intro + Posters</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rye&display=swap" rel="stylesheet">
+  <style>
+    :root{ --bg:#0a0604; --ink:#f8ecd9; --ink-dim:#d8c4a5; --gold:#e8b862; --bronze:#8b5a2b; --shadow:rgba(0,0,0,.65); --focus:#ffd166; --error:#ff595e; --gap:clamp(.75rem,2vw,1.2rem); }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;overflow-x:hidden}
+
+    /* ===== INTRO (full-bleed, no React) ===== */
+    .intro{position:relative;width:100%;height:100vh;overflow:hidden;background:#9B8B7E;filter:sepia(.6) contrast(1.15)}
+    #intro3d{position:absolute;inset:0;display:block}
+    .intro-vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(70% 60% at 50% 40%, transparent 55%, rgba(0,0,0,.55) 100%)}
+    .intro-copy{position:absolute;inset:0;display:grid;place-items:center;text-align:center;z-index:5}
+    .intro h1{font-family:"Rye",serif;letter-spacing:.06em;color:var(--gold);text-shadow:0 .06em 0 var(--bronze),0 .25em .8em var(--shadow);font-size:clamp(2.4rem,8vw,6rem);margin:.2rem 0}
+    .kicker{letter-spacing:.22em;color:var(--ink-dim);font-size:clamp(.9rem,2.4vw,1.3rem)}
+    .slug{max-width:min(70ch,90vw);margin:.75rem auto 0;color:var(--ink);font-size:clamp(1rem,2.6vw,1.2rem)}
+    .scroll{position:absolute;left:50%;bottom:1rem;transform:translateX(-50%);letter-spacing:.18em;color:var(--ink-dim);font-size:.95rem;animation:hint 3s ease-in-out infinite}
+    @keyframes hint{0%,100%{opacity:0}40%{opacity:1}}
+
+    /* Impact flash + Title card after train hit */
+    .flash{position:fixed;inset:0;background:#fff;z-index:100;display:none}
+    .flash.show{display:block}
+    .titlecard{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:#000;z-index:90}
+    .titlecard.show{display:flex;animation:fadeIn .8s ease-out both}
+    .title-inner{text-align:center;position:relative}
+    .title-line{font-size:clamp(2.5rem,10vw,8rem);font-weight:900;color:#D4A574;letter-spacing:.15em;text-transform:uppercase;line-height:1.1;text-shadow:6px 6px 0 rgba(139,111,71,.6), 12px 12px 20px rgba(0,0,0,.4);-webkit-text-stroke:2px rgba(0,0,0,.3);font-family:Impact,"Arial Black",sans-serif}
+    .title-line.em{font-size:clamp(3rem,12vw,10rem);color:#FFD700;-webkit-text-stroke:3px rgba(0,0,0,.4)}
+    .subtitle{margin-top:2rem;text-align:center;color:#D4A574;letter-spacing:.35em;font-family:"Courier New",monospace;font-weight:bold;animation:fadeIn 2s ease-in .5s both}
+    .rings{position:absolute;inset:0;opacity:.55}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+    /* ===== POSTERS ===== */
+    .section{position:relative;z-index:10;padding:clamp(1.2rem, 3vw, 2rem)}
+    .grid{width:min(1100px,100%);margin:0 auto;display:grid;gap:var(--gap);grid-template-columns:repeat(auto-fit,minmax(min(360px,100%),1fr))}
+    .card{background:#2d1810;border:4px solid var(--bronze);border-radius:14px;box-shadow:0 1rem 3rem var(--shadow);display:flex;flex-direction:column;overflow:hidden}
+    .card header{background:#1a0f08;border-bottom:3px solid var(--bronze);padding:1rem;text-align:center}
+    .card h3{font-family:"Rye",serif;color:var(--gold);font-size:1.8rem;margin:.1rem 0 .2rem;text-shadow:0 .1rem .3rem var(--shadow)}
+    .card p.label{letter-spacing:.18em;color:var(--ink-dim);font-size:.95rem;position:relative;padding-inline:1.2rem}
+.card p.label::before,.card p.label::after{content:"";position:absolute;top:50%;width:.65rem;height:.65rem;border:2px solid var(--bronze);border-radius:50%;transform:translateY(-50%)}
+.card p.label::before{left:0}
+.card p.label::after{right:0}
+    .thumb{all:unset;display:grid;place-items:center;aspect-ratio:16/9;width:100%;background:#000;cursor:pointer;position:relative}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.86) contrast(1.06)}
+    .thumb:focus-visible{outline:4px solid var(--focus);outline-offset:3px}
+    .play{position:absolute;width:3.25rem;height:3.25rem;border-radius:50%;border:3px solid var(--gold);display:grid;place-items:center;background:rgba(0,0,0,.35);backdrop-filter:blur(3px);box-shadow:0 .75rem 2rem var(--shadow)}
+    .play::after{content:"▶";margin-left:.12rem;color:var(--gold);font-size:1.1rem}
+    .meta{padding:.85rem 1rem;display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;border-top:3px solid var(--bronze)}
+    .pill{padding:.25rem .6rem;border:2px solid var(--bronze);border-radius:999px;font-size:.9rem;letter-spacing:.06em;color:var(--ink-dim)}
+    .act{margin-left:auto;display:flex;gap:.4rem}
+    .btn{background:#1a0f08;border:2px solid var(--bronze);color:var(--ink);padding:.45rem .7rem;border-radius:8px;letter-spacing:.06em;cursor:pointer}
+    .btn:focus-visible{outline:4px solid var(--focus);outline-offset:2px}
+    .details{display:none;border-top:3px solid var(--bronze);padding:.9rem 1rem;line-height:1.25;color:var(--ink-dim)}
+    .details.open{display:block}
+
+    /* ===== MODAL & TOAST ===== */
+    .toast{position:fixed;left:50%;top:1rem;transform:translateX(-50%);z-index:2000;max-width:min(800px,92vw);padding:.9rem 1rem;border-radius:10px;border:2px solid currentColor;background:color-mix(in oklab, #1a0f08, white 3%);box-shadow:0 .75rem 2rem var(--shadow);display:none}
+    .toast.show{display:block}
+    .toast.error{color:var(--error)}
+    .modal{position:fixed;inset:0;display:none;place-items:center;padding:1.5rem;background:rgba(0,0,0,.96);z-index:3000}
+    .modal.open{display:grid}
+    .dialog{width:min(1400px,96vw);aspect-ratio:16/9;border:8px solid var(--gold);box-shadow:0 0 80px color-mix(in oklab, var(--gold) 20%, black);position:relative;background:#000;border-radius:10px}
+    .dialog iframe{width:100%;height:100%;border:0}
+    .close{position:absolute;top:-3.25rem;right:0;background:var(--gold);color:#000;border:0;padding:.7rem 1.1rem;border-radius:10px;letter-spacing:.16em;font-weight:600;cursor:pointer}
+    .close:focus-visible{outline:4px solid var(--focus);outline-offset:3px}
+
+    .visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
+    @media (max-width:768px){.close{top:-3rem}}
+    @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <!-- ===== INTRO ===== -->
+  <section class="intro" id="intro">
+    <canvas id="intro3d" aria-hidden="true"></canvas>
+    <div class="intro-vignette" aria-hidden="true"></div>
+    <div class="intro-copy" aria-live="polite" aria-atomic="true">
+      <div>
+        <p class="kicker">A WESTERN PICTURE</p>
+        <h1>THE GOOD, THE BAD,<br/>AND THE SPUDDY</h1>
+        <p class="slug">Cold dawn. The whistle carries first. A tumbleweed leans into the wind as the truth train rounds the bend.</p>
+      </div>
+      <div class="scroll">SCROLL TO ENTER TOWN ↓</div>
+    </div>
+  </section>
+
+  
+        <div class="title-line">THE BAD,</div>
+        <div class="title-line em">AND THE SPUDDY</div>
+      </div>
+      <div class="subtitle">
+        <div>A TALE OF INFLUENCER JUSTICE</div>
+        <div style="margin-top:.5rem">ON THE DIGITAL FRONTIER</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== POSTERS ===== -->
+  <section class="section" id="posters" aria-label="Feature posters">
+    <div class="grid">
+      <article class="card" data-id="OoQzeY2rd7o">
+        <header>
+          <h3>PART ONE</h3>
+          <p class="label">RISE OF THE SPUD</p>
+        </header>
+        <button class="thumb" aria-label="Play Part One: Rise of the Spud">
+          <img alt="Poster: Rise of the Spud" loading="lazy" src="https://i.ytimg.com/vi/OoQzeY2rd7o/hqdefault.jpg" />
+          <span class="play" aria-hidden="true"></span>
+        </button>
+        <div class="meta">
+          <span class="pill">7 min</span>
+          <span class="pill">Boise Gulch</span>
+          <div class="act">
+            <button class="btn js-more" aria-expanded="false" aria-controls="d1">Read more</button>
+            <button class="btn js-save">Save poster</button>
+          </div>
+        </div>
+        <div id="d1" class="details" hidden>
+          Idaho Potato rises from fryer-hand to frontier brand. GoPro glint, sermons on grit. The spudfolk cheer—until a whistle from the east.
+        </div>
+      </article>
+
+      <article class="card" data-id="cCzZ7JY2wtw">
+        <header>
+          <h3>PART TWO</h3>
+          <p class="label">THE RECKONING</p>
+        </header>
+        <button class="thumb" aria-label="Play Part Two: The Reckoning">
+          <img alt="Poster: The Reckoning" loading="lazy" src="https://i.ytimg.com/vi/cCzZ7JY2wtw/hqdefault.jpg" />
+          <span class="play" aria-hidden="true"></span>
+        </button>
+        <div class="meta">
+          <span class="pill">9 min</span>
+          <span class="pill">Exposé Express</span>
+          <div class="act">
+            <button class="btn js-more" aria-expanded="false" aria-controls="d2">Read more</button>
+            <button class="btn js-save">Save poster</button>
+          </div>
+        </div>
+        <div id="d2" class="details" hidden>
+          Dawn train. Paper rolls. Receipts fly. When headlines hit the dust, even a russet has to choose: myth maintenance or truth.
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== TOAST & MODAL ===== -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Video player" aria-hidden="true">
+    <div class="dialog" role="document">
+      <button class="close" id="closeBtn" aria-label="Close video">✕ CLOSE</button>
+      <iframe id="player" title="Spuddy Player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="eager"></iframe>
+    </div>
+  </div>
+
+  <!-- IMPORTANT: Three.js must load BEFORE our inline script so THREE exists (no defer) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+  const qs=s=>document.querySelector(s), qsa=s=>Array.from(document.querySelectorAll(s));
+  const toast=qs('#toast'); function showToast(msg,kind='info',ms=2200){toast.textContent=msg;toast.className='toast '+kind+' show';clearTimeout(showToast._t);showToast._t=setTimeout(()=>toast.className='toast '+kind,ms)}
+
+  // ===== Tiny self-tests to catch regressions =====
+  (function selfTests(){
+    const results=[]; const push=(name,pass,note='')=>results.push({name,pass,note});
+    push('THREE present', typeof window.THREE!=='undefined');
+    push('WebGL supported', !!(window.WebGLRenderingContext));
+    push('Intro canvas exists', !!qs('#intro3d'));
+    push('Poster cards exist', qsa('.card').length>=2);
+    if(results.some(r=>!r.pass)) { console.table(results); showToast('Startup self-test failed — check console', 'error', 5000); }
+    else { console.table(results); }
+  })();
+
+  // ===== Posters interactions (unchanged) =====
+  (function posters(){
+    const modal=qs('#modal'), player=qs('#player'), closeBtn=qs('#closeBtn'); let lastFocus=null;
+    function openVideo(id){ try{ lastFocus=document.activeElement; player.src=`https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`; modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); closeBtn.focus(); document.body.style.overflow='hidden'; }catch(e){ showToast('Could not open video','error'); } }
+    function closeVideo(){ player.src=''; modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; if(lastFocus&&lastFocus.focus) lastFocus.focus(); }
+    qsa('.thumb').forEach(btn=>{ btn.addEventListener('click',()=> openVideo(btn.closest('.card').dataset.id)); btn.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();openVideo(btn.closest('.card').dataset.id);} }); });
+    closeBtn.addEventListener('click', closeVideo); addEventListener('keydown', e=>{ if(e.key==='Escape'&&modal.classList.contains('open')) closeVideo(); });
+    qsa('.js-more').forEach(b=> b.addEventListener('click',()=>{ const d=b.closest('.card').querySelector('.details'); const open=d.classList.toggle('open'); d.hidden=!open; b.setAttribute('aria-expanded', String(open)); b.textContent=open?'Read less':'Read more'; }));
+    const CACHE_NAME='spuddy-poster-cache-v2';
+    async function cachePoster(card){ const id=card.dataset.id; const img=card.querySelector('img'); try{ const meta={ id, title:card.querySelector('h3')?.textContent||'', label:card.querySelector('.label')?.textContent||'', details:card.querySelector('.details')?.textContent?.trim()||'' }; const list=JSON.parse(localStorage.getItem('spuddy:saved')||'[]').filter(x=>x&&x.id); const next=[...list.filter(x=>x.id!==id), meta]; localStorage.setItem('spuddy:saved', JSON.stringify(next)); }catch(e){} try{ if('caches' in window && img && img.src){ const c=await caches.open(CACHE_NAME); await c.add(new Request(img.src,{mode:'no-cors'})); } showToast('Poster saved for later'); }catch(e){ showToast('Saved info (thumbnail may be online-only)'); } card.dataset.saved='true'; }
+    qsa('.js-save').forEach(btn=> btn.addEventListener('click',()=> cachePoster(btn.closest('.card'))));
+  })();
+
+  // ===== Cinematic Intro: port of your React scene to vanilla HTML/JS =====
+  (function intro(){
+    if(typeof THREE==='undefined'){ showToast('Graphics engine failed to load. Check your network (CDN).', 'error', 6000); return; }
+    const mount=qs('#intro'); const canvas=qs('#intro3d');
+    let W=mount.clientWidth, H=mount.clientHeight;
+    const renderer=new THREE.WebGLRenderer({canvas, antialias:false, alpha:false});
+    renderer.setSize(W,H); renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));
+
+    const scene=new THREE.Scene(); scene.fog=new THREE.Fog(0x8B7355,10,50); scene.background=new THREE.Color(0x9B8B7E);
+    const camera=new THREE.PerspectiveCamera(65, W/H, 0.1, 1000); camera.position.set(0,2,25); camera.lookAt(0,2,0);
+    const amb=new THREE.AmbientLight(0xFFD4A3,.4); scene.add(amb);
+    const sun=new THREE.DirectionalLight(0xFFB366,1.2); sun.position.set(20,3,10); scene.add(sun);
+
+    const ground=new THREE.Mesh(new THREE.PlaneGeometry(100,100), new THREE.MeshLambertMaterial({color:0x8B7355,flatShading:true}));
+    ground.rotation.x=-Math.PI/2; scene.add(ground);
+
+    const mkTrack=x=>{ const t=new THREE.Mesh(new THREE.BoxGeometry(.3,.15,100), new THREE.MeshLambertMaterial({color:0x3D3D3D})); t.position.set(x,.1,0); scene.add(t) };
+    mkTrack(-1.5); mkTrack(1.5);
+    for(let i=-20;i<30;i+=2){ const tie=new THREE.Mesh(new THREE.BoxGeometry(4,.2,.3), new THREE.MeshLambertMaterial({color:0x5C4033})); tie.position.set(0,.05,i); scene.add(tie) }
+
+    const saloon=new THREE.Mesh(new THREE.BoxGeometry(8,5,6), new THREE.MeshLambertMaterial({color:0x8B6F47})); saloon.position.set(-10,2.5,-5); scene.add(saloon);
+    const roof=new THREE.Mesh(new THREE.BoxGeometry(9,.5,7), new THREE.MeshLambertMaterial({color:0x654321})); roof.position.set(-10,5.25,-5); scene.add(roof);
+
+    const pole=(x,z)=>{ const p=new THREE.Mesh(new THREE.CylinderGeometry(.15,.15,8,6), new THREE.MeshLambertMaterial({color:0x5C4033})); p.position.set(x,4,z); scene.add(p); const cross=new THREE.Mesh(new THREE.BoxGeometry(3,.2,.2), p.material); cross.position.set(x,7,z); scene.add(cross) };
+    pole(6,-10); pole(6,0); pole(6,10);
+
+    const train=new THREE.Group();
+    const engine=new THREE.Mesh(new THREE.BoxGeometry(4,4,8), new THREE.MeshLambertMaterial({color:0x1a1a1a})); engine.position.set(0,3,0); train.add(engine);
+    const catcher=new THREE.Mesh(new THREE.BoxGeometry(3,1,2), engine.material); catcher.position.set(0,1.5,4.5); train.add(catcher);
+    const stack=new THREE.Mesh(new THREE.CylinderGeometry(.5,.6,3,8), new THREE.MeshLambertMaterial({color:0x2a2a2a})); stack.position.set(0,6.5,2); train.add(stack);
+    const wheelGeo=new THREE.CylinderGeometry(1,1,.4,16), wheelMat=new THREE.MeshLambertMaterial({color:0x3a3a3a});
+    for(let i=0;i<4;i++){ const w1=new THREE.Mesh(wheelGeo,wheelMat); w1.position.set(-2,1,-2+i*1.5); w1.rotation.z=Math.PI/2; train.add(w1); const w2=w1.clone(); w2.position.x=2; train.add(w2) }
+    train.position.set(0,0,-60); scene.add(train);
+
+    const dustCount=10000; const dustPos=new Float32Array(dustCount*3); for(let i=0;i<dustCount;i++){ dustPos[i*3]=(Math.random()-.5)*70; dustPos[i*3+1]=Math.random()*8; dustPos[i*3+2]=(Math.random()-.5)*70 }
+    const dust=new THREE.Points(new THREE.BufferGeometry().setAttribute('position', new THREE.BufferAttribute(dustPos,3)), new THREE.PointsMaterial({color:0xC4A57B,size:.4,transparent:true,opacity:.5,sizeAttenuation:true})); scene.add(dust);
+
+    const smokeCount=5000; const smokePos=new Float32Array(smokeCount*3); const smokeVel=[]; for(let i=0;i<smokeCount;i++){ smokePos[i*3]=(Math.random()-.5)*3; smokePos[i*3+1]=Math.random()*4; smokePos[i*3+2]=(Math.random()-.5)*3; smokeVel.push({x:(Math.random()-.5)*.03,y:Math.random()*.08+.05,z:(Math.random()-.5)*.03}); }
+    const smokeGeo=new THREE.BufferGeometry().setAttribute('position', new THREE.BufferAttribute(smokePos,3)); const smoke=new THREE.Points(smokeGeo, new THREE.PointsMaterial({color:0x6a6a6a,size:2,transparent:true,opacity:.4,sizeAttenuation:true})); train.add(smoke);
+
+    // Audio: kick in on first input (and also when scroll passes threshold)
+    let audioCtx=null, trainSound=null, steamSound=null; function initAudio(){ if(audioCtx) return; const AC=window.AudioContext||window.webkitAudioContext; if(!AC) return; audioCtx=new AC(); const osc=audioCtx.createOscillator(); const gain=audioCtx.createGain(); const filt=audioCtx.createBiquadFilter(); osc.type='sawtooth'; osc.frequency.setValueAtTime(40,audioCtx.currentTime); filt.type='lowpass'; filt.frequency.setValueAtTime(200,audioCtx.currentTime); gain.gain.setValueAtTime(0,audioCtx.currentTime); gain.gain.linearRampToValueAtTime(0.12,audioCtx.currentTime+1); osc.connect(filt); filt.connect(gain); gain.connect(audioCtx.destination); osc.start(); trainSound={oscillator:osc,gainNode:gain,filter:filt}; const bufferSize=audioCtx.sampleRate*2; const noiseBuffer=audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate); const out=noiseBuffer.getChannelData(0); for(let i=0;i<bufferSize;i++){ out[i]=Math.random()*2-1 } const white=audioCtx.createBufferSource(); white.buffer=noiseBuffer; white.loop=true; const filt2=audioCtx.createBiquadFilter(); filt2.type='bandpass'; filt2.frequency.setValueAtTime(2000,audioCtx.currentTime); const g2=audioCtx.createGain(); g2.gain.setValueAtTime(0.06,audioCtx.currentTime); white.connect(filt2); filt2.connect(g2); g2.connect(audioCtx.destination); white.start(); steamSound={whiteNoise:white,gainNode:g2}; }
+    ['pointerdown','keydown','touchstart'].forEach(ev=> document.addEventListener(ev, initAudio, { once:true, passive:true }));
+
+    // Scroll-triggered start (no competition with overlays)
+    let started=false; let trainZ=-60, cameraZ=25; const clock=new THREE.Clock();
+    const startIfInView=()=>{ const rect=mount.getBoundingClientRect(); const inView=rect.top<window.innerHeight*0.6 && rect.bottom>window.innerHeight*0.2; if(!started && (inView || window.scrollY>40)){ started=true; initAudio(); } };
+    document.addEventListener('scroll', startIfInView, {passive:true}); startIfInView();
+
+    function animate(){ requestAnimationFrame(animate); const t=clock.getElapsedTime(); if(!started){ renderer.render(scene,camera); return; }
+      const speed=.25 + (trainZ+60)*.005; trainZ+=speed; train.position.z=trainZ; if(cameraZ>10) cameraZ-=.05; const prox=Math.max(0,(trainZ+60)/76); const sx=(Math.random()-.5)*(0.02+prox*0.08); const sy=(Math.random()-.5)*(0.02+prox*0.08); camera.position.set(sx,2+sy,cameraZ); camera.lookAt(0,2,0); if(trainSound){ const vol=Math.min(.3,.15+prox*.15); const tNow=audioCtx?audioCtx.currentTime:0; trainSound.gainNode.gain.setValueAtTime(vol,tNow); trainSound.oscillator.frequency.setValueAtTime(40+prox*30,tNow) }
+      train.children.forEach(ch=>{ if(ch.geometry && ch.geometry.type==='CylinderGeometry'){ ch.rotation.x += .25 } });
+      const dp=dust.geometry.attributes.position.array; for(let i=0;i<dustCount;i++){ dp[i*3]+=Math.sin(t*2+i)*.01; dp[i*3+1]+=Math.cos(t*3+i)*.008 } dust.geometry.attributes.position.needsUpdate=true; dust.rotation.y=t*.08;
+      const sp=smoke.geometry.attributes.position.array; for(let i=0;i<smokeCount;i++){ sp[i*3]+=smokeVel[i].x; sp[i*3+1]+=smokeVel[i].y; sp[i*3+2]+=smokeVel[i].z; if(sp[i*3+1]>20){ sp[i*3]=(Math.random()-.5)*3; sp[i*3+1]=6; sp[i*3+2]=2+(Math.random()-.5)*3 } } smoke.geometry.attributes.position.needsUpdate=true;
+      renderer.render(scene,camera);
+    }
+    animate();
+
+    function onResize(){ W=mount.clientWidth; H=mount.clientHeight; renderer.setSize(W,H); camera.aspect=W/H; camera.updateProjectionMatrix(); }
+    addEventListener('resize', onResize, {passive:true});
+  })();
+  </script>
+</body>
+</html>
